@@ -1,8 +1,8 @@
-[![OTPless](https://d1j61bbz9a40n6.cloudfront.net/website/home/v4/logo/white_logo.svg)](https://otpless.com/platforms/react)
+[![OTPless](https://d1j61bbz9a40n6.cloudfront.net/website/home/v4/logo/white_logo.svg)](https://otpless.com/platforms/angular)
 
-# Next Demo : Otpless Login Page
+# Angular Demo : Otpless Login Page
 
-## Steps to add OTPless SDK to your Next Website
+## Steps to add OTPless SDK to your Angular Website
 
 1. **Add OTPLESS Script as utils function**
 
@@ -42,10 +42,43 @@ export const initOTPless = (callback: Function) => {
     initOTPless(this.callback);
   }
 
+  openModal = () => {
+    const modalContainer = this.document.getElementById('modalContainer');
+    if (modalContainer) {
+      this.renderer.setStyle(modalContainer, 'display', 'flex');
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramsValue = urlParams.get("ex");
+
+      if (!paramsValue) {
+        const currentURL = window.location.href;
+        const newParam1 = "ex=true";
+        const updatedURL = `${currentURL}?${newParam1}`;
+        window.history.pushState(null, "", updatedURL);
+      }
+
+      initOTPless(this.callback);
+    }
+  };
+
+  removeQueryParam = (param: any) => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete(param);
+    window.history.pushState(null, "", url);
+  };
+
+  closeModal = (e: any) => {
+    const modalContainer = this.document.getElementById('modalContainer');
+    if (modalContainer && e.target === modalContainer) {
+      this.renderer.setStyle(modalContainer, 'display', 'none');
+      this.removeQueryParam('ex');
+    }
+  };
+
   callback = (otplessUser: any): void => {
-    localStorage.setItem('storedData', otplessUser.token);
-    this.router.navigate(['/result']);
-  }
+    alert(JSON.stringify(otplessUser));
+    //YOUR_LOGIC
+  };
 ```
 
 3. **Add Otpless-login-page div**
@@ -55,15 +88,55 @@ export const initOTPless = (callback: Function) => {
 ```jsx
 <div id="otpless-login-page"></div>
 ```
+4. **Add css**
+
+> Add the following div in Login/Signup component html.
+
+```jsx
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-container.show {
+    display: flex;
+  }
+  
+  #loginBtn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+```
 
 ### This demo implementation adds extra modularity, scalability and reusability to the otpless-auth sdk
 
 ### Integration Options
 
-- [OTPless-Page](https://github.com/sjariN/otpless-next-demo/)
-- [OTPless-Page-OnClick](https://github.com/sjariN/otpless-next-demo/tree/on-button-click-login-page)
-- [OTPless-Floater](https://github.com/sjariN/otpless-next-demo/tree/widget)
-- [OTPless-Floater-OnClick](https://github.com/sjariN/otpless-next-demo/tree/on-button-click-widget)
+- [OTPless-Page](https://github.com/sjariN/otpless-angular-demo/)
+- [OTPless-Page-OnClick](https://github.com/sjariN/otpless-angular-demo/tree/on-button-click-login-page)
+- [OTPless-Floater](https://github.com/sjariN/otpless-angular-demo/tree/widget)
+- [OTPless-Floater-OnClick](https://github.com/sjariN/otpless-angular-demo/tree/on-button-click-widget)
 
 ### Usage
 

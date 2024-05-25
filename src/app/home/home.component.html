@@ -1,3 +1,10 @@
-<div id="otpless-login-page"></div>
-<router-outlet></router-outlet>
-
+<main>
+    <button id="loginBtn" (click)="openModal()">Login with modal</button>
+  
+    <div class="modal-container" id="modalContainer" (click)="closeModal($event)">
+      <div id="otpless-login-page"></div>
+    </div>
+  
+    <router-outlet></router-outlet>
+  </main>
+  
