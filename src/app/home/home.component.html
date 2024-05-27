@@ -1,10 +1,16 @@
 <main>
-    <button id="loginBtn" (click)="openModal()">Login with modal</button>
+  <div id="mobile-section">
+    <input id="mobile-input" type="number" #mobileInput placeholder="Enter mobile number" />
+    <button (click)="phoneAuth(mobileInput.value)">Request OTP</button>
+  </div>
   
-    <div class="modal-container" id="modalContainer" (click)="closeModal($event)">
-      <div id="otpless-login-page"></div>
-    </div>
+  <div id="otp-section">
+    <input id="otp-input" #otpInput placeholder="Enter OTP" />
+    <button (click)="verifyOTP(otpInput.value)">Verify OTP</button>
+  </div>
   
+  <button (click)="oAuth('WHATSAPP')">Authenticate with WhatsApp</button>
+  <button (click)="oAuth('GMAIL')">Authenticate with Gmail</button>
     <router-outlet></router-outlet>
   </main>
   
