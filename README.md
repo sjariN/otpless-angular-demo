@@ -28,8 +28,6 @@ export const initOTPless = (callback: Function) => {
 
   Reflect.set(window, "otpless", callback);
 };
-
-
 ```
 
 2. **Load the script in Login/Signup component and add callback function**
@@ -126,7 +124,6 @@ export const initOTPless = (callback: Function) => {
     margin-bottom: 20px;
     cursor: pointer;
   }
-  
 ```
 
 ### This demo implementation adds extra modularity, scalability and reusability to the otpless-auth sdk
@@ -137,41 +134,5 @@ export const initOTPless = (callback: Function) => {
 - [OTPless-Page-OnClick](https://github.com/sjariN/otpless-angular-demo/tree/on-button-click-login-page)
 - [OTPless-Floater](https://github.com/sjariN/otpless-angular-demo/tree/widget)
 - [OTPless-Floater-OnClick](https://github.com/sjariN/otpless-angular-demo/tree/on-button-click-widget)
+- [Headless](https://github.com/sjariN/otpless-angular-demo/tree/headless)
 
-### Usage
-
-> **Prequisite** [NodeJS](https://nodejs.org/en)
-
-- Install Packages
-
-  ```bash
-  npm install
-  ```
-
-- Run the demo
-
-  ```bash
-  npm run dev
-  ```
-
-- Open [localhost:3000](http://localhost:3000) in your browser
-- Switch branches to check out available options to integrate _OTPless_ in your project.
-
-> Received User Data Format
-
-```json
-// otpless user Format
-{
-  "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "timestamp": "YYYY-MM-DD HH:MM:SS",
-  "timezone": "+XX:XX",
-  "mobile": {
-    "name": "User Name",
-    "number": "User Mobile Number"
-  },
-  "email": {
-    "name": "User Name ",
-    "email": "User Email"
-  }
-}
-```
