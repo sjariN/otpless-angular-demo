@@ -1,24 +1,73 @@
+import { Component, Inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { initOTPless } from '../../utils/initOtpless';
-
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  constructor(@Inject(DOCUMENT) private document: Document,private router: Router) {}
+  mobile = '';
+  OTPlessSignin = null;
+  constructor(
+  ) {}
+
   ngOnInit(): void {
-    initOTPless(this.callback);
+    this.OTPlessSignin = this.initOTPless();
   }
 
-  callback = (otplessUser: any): void => {
-    alert(JSON.stringify(otplessUser));
-    localStorage.setItem('storedData', otplessUser.token);
-    this.router.navigate(['/result']);
+  initOTPless() {
+    const OTPless = Reflect.get(window, "OTPless");
+    return new OTPless(this.callback);
   }
+
+  callback = (otplessUser: any) => {
+    const emailMap = otplessUser.identities.find(
+      (item: any) => item.identityType === 'EMAIL'
+    );
+
+    const mobileMap = otplessUser.identities.find(
+      (item: any) => item.identityType === 'MOBILE'
+    )?.identityValue;
+
+    const token = otplessUser.token;
+
+    const email = emailMap?.identityValue;
+
+    const mobile = mobileMap?.identityValue;
+
+    const name = emailMap?.name || mobileMap?.name;
+    // Implement your custom logic here.
+    console.log(otplessUser);
+  };
+
+  phoneAuth = (phone: string) => {
+    this.mobile = phone;
+    // @ts-ignore
+    this.OTPlessSignin.initiate({
+      channel: 'PHONE',
+      phone: phone,
+      countryCode: '+91',
+    });
+  };
+
+  verifyOTP = (otp: string) => {
+    // @ts-ignore
+    this.OTPlessSignin.verify({
+      channel: 'PHONE',
+      phone: this.mobile,
+      otp: otp,
+      countryCode: '+91',
+    });
+  };
+
+  oAuth = (channel: 'WHATSAPP' | 'GMAIL' | 'FACEBOOK' | 'MICROSOFT') => {
+    // @ts-ignore
+    this.OTPlessSignin.initiate({
+      channel: 'OAUTH',
+      channelType: channel,
+    });
+  };
 }
