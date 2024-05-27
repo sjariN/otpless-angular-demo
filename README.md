@@ -1,8 +1,8 @@
 [![OTPless](https://d1j61bbz9a40n6.cloudfront.net/website/home/v4/logo/white_logo.svg)](https://otpless.com/platforms/react)
 
-# Next Demo : Otpless Login Page
+# Angular Demo : Otpless Login Page
 
-## Steps to add OTPless SDK to your Next Website
+## Steps to add OTPless SDK to your Angular Website
 
 1. **Add OTPLESS Script as utils function**
 
@@ -28,8 +28,6 @@ export const initOTPless = (callback: Function) => {
 
   Reflect.set(window, "otpless", callback);
 };
-
-
 ```
 
 2. **Load the script in Login/Signup component and add callback function**
@@ -60,45 +58,8 @@ export const initOTPless = (callback: Function) => {
 
 ### Integration Options
 
-- [OTPless-Page](https://github.com/sjariN/otpless-next-demo/)
-- [OTPless-Page-OnClick](https://github.com/sjariN/otpless-next-demo/tree/on-button-click-login-page)
-- [OTPless-Floater](https://github.com/sjariN/otpless-next-demo/tree/widget)
-- [OTPless-Floater-OnClick](https://github.com/sjariN/otpless-next-demo/tree/on-button-click-widget)
-
-### Usage
-
-> **Prequisite** [NodeJS](https://nodejs.org/en)
-
-- Install Packages
-
-  ```bash
-  npm install
-  ```
-
-- Run the demo
-
-  ```bash
-  npm run dev
-  ```
-
-- Open [localhost:3000](http://localhost:3000) in your browser
-- Switch branches to check out available options to integrate _OTPless_ in your project.
-
-> Received User Data Format
-
-```json
-// otpless user Format
-{
-  "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "timestamp": "YYYY-MM-DD HH:MM:SS",
-  "timezone": "+XX:XX",
-  "mobile": {
-    "name": "User Name",
-    "number": "User Mobile Number"
-  },
-  "email": {
-    "name": "User Name ",
-    "email": "User Email"
-  }
-}
-```
+- [OTPless-Page](https://github.com/sjariN/otpless-angular-demo/)
+- [OTPless-Page-OnClick](https://github.com/sjariN/otpless-angular-demo/tree/on-button-click-login-page)
+- [OTPless-Floater](https://github.com/sjariN/otpless-angular-demo/tree/widget)
+- [OTPless-Floater-OnClick](https://github.com/sjariN/otpless-angular-demo/tree/on-button-click-widget)
+- [Headless](https://github.com/sjariN/otpless-angular-demo/tree/headless)
